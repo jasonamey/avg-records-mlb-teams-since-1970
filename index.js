@@ -43,6 +43,7 @@ for (const strRecord of data.toString().split('\n')) {
 
 delete seasons['2020']
 delete seasons['1994']
+delete seasons['1995']
 delete seasons['1981']
 delete seasons['yearID']
 
