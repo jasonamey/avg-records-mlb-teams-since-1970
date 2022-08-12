@@ -8,14 +8,21 @@ const average = (array) => array.reduce((a, b) => a + b) / array.length
 
 function createReport(numOfBottomTeams, seasons) {
   let reportString = `FOR BOTTOM ${numOfBottomTeams} TEAMS :\n`
+  const yearAverages = []
   for (const year in seasons) {
     const sortedSeason = seasons[year].sort((a, b) => a - b)
-    seasons[year] = sortedSeason
-    const yearLine = `${year} : ${average(
-      sortedSeason.slice(0, numOfBottomTeams)
-    ).toFixed(2)}\n`
-    reportString += yearLine
+    let yearAndAverage = [
+      year,
+      average(sortedSeason.slice(0, numOfBottomTeams))
+    ]
+    yearAverages.push(yearAndAverage)
   }
+  yearAverages
+    .sort((a, b) => a[1] - b[1])
+    .forEach((item) => {
+      const yearLine = `${item[0]} : ${item[1].toFixed(2)}\n`
+      reportString += yearLine
+    })
   reportString += '------------------\n'
   return reportString
 }
@@ -46,4 +53,4 @@ arr.forEach((num) => {
   reportsString += createReport(num, seasons)
 })
 
-fs.writeFileSync('loss-data.txt', reportsString)
+fs.writeFileSync('loss-data-sorted.txt', reportsString)
