@@ -30,7 +30,7 @@ function createReport(numOfBottomTeams, seasons) {
 for (const strRecord of data.toString().split('\n')) {
   const arrRecord = strRecord.split(',')
   const year = arrRecord[0]
-  if (year < 1970) {
+  if (year < 1961) {
     continue
   }
   const wins = parseInt(arrRecord[8])
